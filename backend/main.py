@@ -2,6 +2,7 @@ import torch
 import torchvision.transforms as transforms
 import torchvision.models as models
 from fastapi import FastAPI, File, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
 import io
 import numpy as np
@@ -10,6 +11,15 @@ MODEL_PATH = "model/skin_cancer_model.pth"
 
 # Initialize FastAPI
 app = FastAPI()
+
+# Configure CORS middleware (Put this right after app initialization)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Change to your frontend URL in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Load class labels (must match your original dataset)
 class_labels = ["akiec", "bcc", "bkl", "df", "mel", "nv", "vasc"]
