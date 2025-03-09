@@ -1,1 +1,3 @@
 backend/model/HAM10000/
+backend/venv
+backend/__pycache__
